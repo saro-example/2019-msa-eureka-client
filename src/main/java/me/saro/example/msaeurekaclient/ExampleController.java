@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class ExampleController {
 
     @Autowired
-    @Lazy
     private EurekaClient eurekaClient;
 
     @Value("${spring.application.name}")

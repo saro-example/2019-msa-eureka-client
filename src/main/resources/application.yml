@@ -7,10 +7,25 @@ eureka:
   client:
     serviceUrl:
       defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
-#    healthcheck:
-#      enabled: true
+    healthcheck:
+      enabled: true
   instance:
+    initialStatus: DOWN
     non-secure-port: 0
     preferIpAddress: true
-#    healthCheckUrl: http://${eureka.hostname}/health
     instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+ribbon:
+  # 재시도여부 / 재시도횟수 / 다른서버로재시도횟수
+  retryable: true
+  MaxAutoRetries: 5
+  MaxAutoRetriesNextServer: 5
+  # 현 클라이언트의 모든 재시도 여부 / 서버 새로고침 간격
+  OkToRetryOnAllOperations: true
+  ServerListRefreshInterval: 2000
+  # 연결제한시간 / 읽기제한시간
+  ConnectTimeout: 20000
+  ReadTimeout: 100000
+  eureka:
+    enabled: true
+
+logging.level.root: DEBUG
